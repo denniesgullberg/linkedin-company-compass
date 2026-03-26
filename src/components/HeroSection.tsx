@@ -60,7 +60,7 @@ const HeroSection = () => {
         </button>
         
         <p className="text-muted-foreground text-xs font-mono mt-4">
-          Works on Chrome, Edge, Brave, Arc & Opera
+          Works on Chrome, Edge, Brave, Arc, Opera, Firefox & Safari
         </p>
       </div>
     </section>
