@@ -1,0 +1,62 @@
+#hirescore-badge {
+  font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+  margin: 8px 0;
+}
+
+#hirescore-badge.hs-fixed {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.hs-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #0a0a0a;
+  border: 1px solid #222;
+  border-radius: 4px;
+  padding: 8px 14px;
+  cursor: default;
+  transition: border-color 0.2s;
+}
+
+.hs-badge:hover {
+  border-color: var(--score-color, #00ff88);
+}
+
+.hs-badge--empty {
+  opacity: 0.7;
+}
+
+.hs-score {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--score-color, #666);
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.hs-badge--empty .hs-score {
+  color: #555;
+}
+
+.hs-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hs-title {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #888;
+  text-transform: uppercase;
+}
+
+.hs-count {
+  font-size: 11px;
+  color: #666;
+}
