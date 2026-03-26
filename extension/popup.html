@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 340px;
+      font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      padding: 20px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #222;
+    }
+    .header h1 {
+      font-size: 14px;
+      letter-spacing: 3px;
+      color: #00ff88;
+      text-transform: uppercase;
+    }
+    .company-name {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    .no-company {
+      color: #666;
+      font-size: 12px;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .auth-section {
+      margin-bottom: 16px;
+    }
+    .auth-section input {
+      width: 100%;
+      padding: 8px 10px;
+      background: #111;
+      border: 1px solid #333;
+      color: #e0e0e0;
+      font-family: inherit;
+      font-size: 12px;
+      border-radius: 3px;
+      margin-bottom: 8px;
+      outline: none;
+    }
+    .auth-section input:focus {
+      border-color: #00ff88;
+    }
+    .form-group {
+      margin-bottom: 14px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      color: #888;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .score-input {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .score-input input[type="range"] {
+      flex: 1;
+      accent-color: #00ff88;
+    }
+    .score-value {
+      font-size: 24px;
+      font-weight: 700;
+      min-width: 40px;
+      text-align: right;
+    }
+    .radio-group {
+      display: flex;
+      gap: 6px;
+    }
+    .radio-group label {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 4px;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 10px;
+      letter-spacing: 0;
+      text-transform: none;
+      color: #999;
+      transition: all 0.15s;
+    }
+    .radio-group input { display: none; }
+    .radio-group input:checked + span {
+      color: #00ff88;
+    }
+    .radio-group label:has(input:checked) {
+      border-color: #00ff88;
+      background: #001a0e;
+    }
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .checkbox-group input[type="checkbox"] {
+      accent-color: #00ff88;
+    }
+    .checkbox-group span {
+      font-size: 12px;
+      color: #ccc;
+    }
+    textarea {
+      width: 100%;
+      padding: 8px 10px;
+      background: #111;
+      border: 1px solid #333;
+      color: #e0e0e0;
+      font-family: inherit;
+      font-size: 12px;
+      border-radius: 3px;
+      resize: vertical;
+      min-height: 60px;
+      outline: none;
+    }
+    textarea:focus { border-color: #00ff88; }
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background: #00ff88;
+      color: #000;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .btn:hover { background: #00cc6e; }
+    .btn:disabled { background: #333; color: #666; cursor: not-allowed; }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid #333;
+      color: #888;
+    }
+    .btn-secondary:hover { border-color: #00ff88; color: #00ff88; }
+    .status { font-size: 11px; text-align: center; margin-top: 8px; }
+    .status.success { color: #00ff88; }
+    .status.error { color: #ff4444; }
+    .existing-ratings {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid #222;
+    }
+    .rating-summary {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .stat {
+      text-align: center;
+      padding: 8px;
+      background: #111;
+      border-radius: 3px;
+    }
+    .stat-value { font-size: 18px; font-weight: 700; }
+    .stat-label { font-size: 8px; letter-spacing: 1px; color: #666; text-transform: uppercase; margin-top: 2px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>HireScore</h1>
+  </div>
+
+  <div id="auth-view">
+    <div class="auth-section">
+      <input type="email" id="email" placeholder="Email">
+      <input type="password" id="password" placeholder="Password">
+      <button class="btn" id="login-btn">LOG IN</button>
+      <button class="btn btn-secondary" id="signup-btn" style="margin-top:6px">SIGN UP</button>
+      <div id="auth-status" class="status"></div>
+    </div>
+  </div>
+
+  <div id="main-view" style="display:none">
+    <div id="user-info" style="font-size:10px;color:#666;margin-bottom:12px">
+      Logged in as <span id="user-email"></span>
+      <a href="#" id="logout-btn" style="color:#ff4444;margin-left:8px">logout</a>
+    </div>
+    
+    <div id="company-info">
+      <div class="no-company" id="no-company">Navigate to a LinkedIn job posting to rate a company</div>
+      <div id="rating-form" style="display:none">
+        <div class="company-name" id="company-name-display"></div>
+        
+        <div id="existing-summary"></div>
+        
+        <div class="form-group">
+          <label>Overall Score</label>
+          <div class="score-input">
+            <input type="range" id="score" min="1" max="100" value="50">
+            <span class="score-value" id="score-display">50</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Response Type</label>
+          <div class="radio-group">
+            <label><input type="radio" name="response" value="automated"><span>Automated</span></label>
+            <label><input type="radio" name="response" value="personal"><span>Personal</span></label>
+            <label><input type="radio" name="response" value="none"><span>No Reply</span></label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Interview</label>
+          <div class="checkbox-group">
+            <input type="checkbox" id="interview">
+            <span>Got an interview</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Comment</label>
+          <textarea id="comment" placeholder="Share your experience..."></textarea>
+        </div>
+
+        <button class="btn" id="submit-btn">SUBMIT RATING</button>
+        <div id="submit-status" class="status"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

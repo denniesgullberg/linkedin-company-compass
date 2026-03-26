@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "HireScore — LinkedIn Company Ratings",
+  "version": "1.0.0",
+  "description": "Rate companies after applying on LinkedIn. See how responsive they are before you apply.",
+  "permissions": ["activeTab", "storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.linkedin.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ],
+  "icons": {
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}
